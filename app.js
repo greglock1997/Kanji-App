@@ -680,6 +680,7 @@ app.post('/sendDatabaseData', async (req, res) => {
     console.log('Data Saved');
 });
 
-app.listen(3000, () => {
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
     console.log('SERVER ONLINE');
 });
