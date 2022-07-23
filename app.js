@@ -385,7 +385,7 @@ app.get('/admin', async (res, req) => {
     for (i = 0; i < initialData.length; i++) {
         // Create new data with new username
         var newData = await new Vocab({
-            user : "admin",
+            user : "Admin",
             answers : initialData[i].answers,
             kanji : initialData[i].kanji,
             english : initialData[i].english,
