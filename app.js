@@ -394,6 +394,7 @@ app.get('/admin', async (res, req) => {
         });
         newData.save();
     };
+    console.log("Data saved");
 });
 
 // MAKE NEW VOCAB DATA FOR NEW USER
