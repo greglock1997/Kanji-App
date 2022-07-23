@@ -385,7 +385,7 @@ app.get('/admin', async (res, req) => {
     for (i = 0; i < initialData.length; i++) {
         // Create new data with new username
         var newData = await new Vocab({
-            user : admin,
+            user : "admin",
             answers : originalData[i].answers,
             kanji : originalData[i].kanji,
             english : originalData[i].english,
@@ -394,6 +394,7 @@ app.get('/admin', async (res, req) => {
         });
         newData.save();
     };
+    res.redirect('/register');
 });
 
 // MAKE NEW VOCAB DATA FOR NEW USER
