@@ -381,7 +381,7 @@ let initialData = [
 ];
 
 // CREATE ADMIN DATA
-app.get('/admin', (res, req) => {
+app.get('/admin', async (res, req) => {
     for (i = 0; i < initialData.length; i++) {
         // Create new data with new username
         var newData = await new Vocab({
@@ -393,7 +393,7 @@ app.get('/admin', (res, req) => {
             learned : false
         });
         newData.save();
-    };    
+    };
 });
 
 // MAKE NEW VOCAB DATA FOR NEW USER
