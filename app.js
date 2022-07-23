@@ -394,7 +394,6 @@ app.get('/admin', async (res, req) => {
         });
         newData.save();
     };
-    res.redirect('/register');
 });
 
 // MAKE NEW VOCAB DATA FOR NEW USER
