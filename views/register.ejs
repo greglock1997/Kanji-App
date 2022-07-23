@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./partials/message.js" defer></script>
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="./partials/header.css">
+    <link rel="stylesheet" href="./partials/message.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+    <title>Register Page</title>
+</head>
+<body>
+    <div class="container">
+        <%- include('./partials/header'); %>
+        <%- include('./partials/message'); %>
+        <div class="main">
+            <div class="register-container">
+                <h1>Register</h1>
+                <form action="/register" method="POST">
+                    <input type="text" placeholder="Username" name="registerUsername" required maxlength="15">
+                    <input type="text" placeholder="Confirm Username" name="registerConfirmUsername" required maxlength="15">
+                    <input type="password" placeholder="Password" name="registerPassword" required maxlength="15">
+                    <input type="password" placeholder="Confirm Password" name="registerConfirmPassword" required maxlength="15">
+                    <button>Register</button>
+                </form>
+                <form action="/login" method="GET">
+                    <button>Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

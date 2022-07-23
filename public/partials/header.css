@@ -1,0 +1,89 @@
+.navbar {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px;
+    min-height: 80px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.navbar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px;
+}
+
+.navbar-links {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.navbar-links h2 {
+    padding: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: 0.1s;
+    margin-right: 20px;
+}
+
+.navbar-links h2:hover {
+    color: dodgerblue;
+}
+
+.navbar-links a {
+    color: black;
+    text-decoration: none;
+    transition: 0.1s;
+}
+
+.navbar-links a:hover {
+    color: dodgerblue;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+}
+
+.bar {
+    display: block;
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: black;
+}
+
+.show {
+    display: flex;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .navbar {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navbar-links {
+        display: none;
+        flex-direction: column;
+        background-color: white;
+        z-index: 1;
+    }
+
+    .navbar-links h2 {
+        padding: 20px;
+        width: 100%;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="learn.js" defer></script>
+    <script src="./partials/message.js" defer></script>
+    <link rel="stylesheet" href="learn.css">
+    <link rel="stylesheet" href="./partials/header.css">
+    <link rel="stylesheet" href="./partials/message.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+    <title>Japanese Practice</title>
+</head>
+<body>
+    <div class="container">
+        <%- include('./partials/header')%>
+        <%- include('./partials/message')%>
+        <div class="main">
+            <div class="learning-interface">
+                <div class="vocab-card hide">
+                    <h1 class="kanji-display"></h1>
+                    <h2 class="english-display"></h2>
+                </div>
+                <button class="button start-learning-button">Start</button>
+                <button class="button gotit-button hide">Okay, Got It</button>
+                <button class="button practice-button hide">Practice</button>
+            </div>
+            <div class="practice-interface hide">
+                <div class="question-display"></div>
+                <div class="score-display hide"></div>
+                <div class="answer-display">
+                    <button class="answer-choice"></button>
+                    <button class="answer-choice"></button>
+                    <button class="answer-choice"></button>
+                    <button class="answer-choice"></button>
+                </div>
+                <button class="button start-button hide">Start</button>
+                <button class="button skip-button">Skip Question</button>
+                <button class="button next-button hide">Next Question</button>
+                <button class="button finish-button hide">Finish</button>
+            </div>
+            <div class="progress-interface hide">
+                <div class="progress-display"></div>
+                <button class="button learn-more-button">Learn New Words</button>
+                <button class="button practice-again-button">Practice Again</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

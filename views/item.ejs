@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="learn.js" defer></script>
+    <script src="./partials/message.js" defer></script>
+    <link rel="stylesheet" href="/create.css">
+    <link rel="stylesheet" href="../partials/header.css">
+    <link rel="stylesheet" href="../partials/message.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+    <title>Japanese Practice</title>
+</head>
+<body>
+    <div class="container">
+        <%- include('./partials/header')%>
+        <%- include('./partials/message')%>
+        <div class="main">
+            <div class="create-container">
+                <h1>EDIT ITEM</h1>
+                <form action="/item" method="POST">
+                    <input type="text" value="<%= vocabItem.kanji %>" name="kanji" required maxlength="1">
+                    <input type="text" value="<%= vocabItem.english %>" name="english" required maxlength="10">
+                    <input type="text" value="<%= vocabItem.answers[0] %>" name="answerOne" required maxlength="10">
+                    <input type="text" value="<%= vocabItem.answers[1] %>" name="answerTwo" required maxlength="10">
+                    <input type="text" value="<%= vocabItem.answers[2] %>" name="answerThree" required maxlength="10">
+                    <input type="text" value="<%= vocabItem.answers[3] %>" name="answerFour" required maxlength="10">
+                    <button>Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

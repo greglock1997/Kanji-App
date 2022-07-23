@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="learn.js" defer></script>
+    <script src="./partials/message.js" defer></script>
+    <link rel="stylesheet" href="edit.css">
+    <link rel="stylesheet" href="./partials/header.css">
+    <link rel="stylesheet" href="./partials/message.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+    <title>Japanese Practice</title>
+</head>
+<body>
+    <div class="container">
+        <%- include('./partials/header')%>
+        <%- include('./partials/message')%>
+        <div class="main">
+            <% for (i = 0; i < vocabData.length; i++) { %>
+                <div class="item">
+                    <h2><%-vocabData[i].kanji %>  /  <%- vocabData[i].english%></h2>
+                    <div class="button-container">
+                        <form action="/edit/<%=vocabData[i].kanji%>" method="GET">
+                            <button class="button-edit"><h2>Edit</h2></button>
+                        </form>
+                        <form action="/delete/<%=vocabData[i].kanji%>"  method="POST">
+                            <button class="button-delete"><h2>Delete</h2></button>
+                        </form>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

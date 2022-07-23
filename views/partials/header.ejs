@@ -1,0 +1,24 @@
+<script src="../partials/header.js" defer></script>
+<div class="navbar">
+    <div class="navbar-header">
+        <h1>Kanji App</h1>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </div>
+    <div class="navbar-links">
+        <% if (loggedIn)  { %>
+            <h2><a href="/learn">Learn</a></h2>
+            <% if (user === 'Admin') { %>
+            <h2><a href="/create">Create</a></h2>
+            <h2><a href="/edit">Edit</a></h2>
+            <% } %>
+            <h2><a href="/logout">Logout</a></h2>
+        <% } else { %>
+            <h2><a href="/login">Login</a></h2>
+            <h2><a href="/register">Register</a></h2>
+        <% } %>
+    </div>
+</div>
