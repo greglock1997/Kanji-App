@@ -217,24 +217,27 @@ startLearningButton.addEventListener('click', () => {
 
     // Check to see if there is new vocabulary to introduce
     if (newItems.length > 0) {
-        // Change interface
-        startLearningButton.classList.add('hide');
-        gotitButton.classList.remove('hide');
-        vocabCard.classList.remove('hide');
+        // Add load-out animation
+        startLearningButton.style.animation = "load-out-bottom 1s ease-in forwards";
 
-        // Set vocabulary
-        kanjiDisplay.innerText = newItems[0].kanji;
-        englishDisplay.innerText = newItems[0].english;
+        // Add timer to allow animation to finish
+        setTimeout(function() {
+            // Change interface
+            startLearningButton.classList.add('hide');
+            gotitButton.classList.remove('hide');
+            vocabCard.classList.remove('hide');
 
-        // Update level
-        for (i = 0; i < userData.length; i++) {
-            if (userData[i].english === newItems[0].english) {
-                userData[i].learned = true;
+            // Set vocabulary
+            kanjiDisplay.innerText = newItems[0].kanji;
+            englishDisplay.innerText = newItems[0].english;
+
+            // Update level
+            for (i = 0; i < userData.length; i++) {
+                if (userData[i].english === newItems[0].english) {
+                    userData[i].learned = true;
+                };
             };
-        };
-
-        // Move to next item
-        //  newItemsCounter++;
+        }, 1000);
     } else {
         startLearningButton.classList.add('hide');
         practiceButton.classList.remove('hide');
@@ -288,26 +291,33 @@ gotitButton.addEventListener('click', () => {
 
 // START PRACTICE BUTTON
 practiceButton.addEventListener('click', () => {
-    // Save data
-    saveData();
+    // Add load-out-animation
+    practiceButton.style.animation = "load-out-bottom 1s ease-in forwards"
+    vocabCard.style.animation = "load-out-top 1s ease-in forwards"
 
-    // If this is their first time, shorten the practice to only 5 items
-    var numberOfIntroducedItems = 0;
-    for (i = 0; i < userData.length; i++) {
-        if (userData[i].learned == true) {
-            numberOfIntroducedItems++;
+    // Add timer before code execution
+    setTimeout(function() {
+        // Save data
+        saveData();
+
+        // If this is their first time, shorten the practice to only 5 items
+        var numberOfIntroducedItems = 0;
+        for (i = 0; i < userData.length; i++) {
+            if (userData[i].learned == true) {
+                numberOfIntroducedItems++;
+            };
         };
-    };
 
-    if (numberOfIntroducedItems <= numberOfNewItems) {
-        numberOfPracticeItems = numberOfIntroducedItems;
-    };
+        if (numberOfIntroducedItems <= numberOfNewItems) {
+            numberOfPracticeItems = numberOfIntroducedItems;
+        };
 
-    // Make a practice deck
-    makePracticeDeck();
+        // Make a practice deck
+        makePracticeDeck();
 
-    // Set interface
-    setPracticeInterface();
+        // Set interface
+        setPracticeInterface();
+    }, 1000)
 });
 
 // ANSWER BUTTONS
@@ -351,6 +361,15 @@ for (let i = 0; i < answerButtons.length; i++) {
 
 // SKIP BUTTON
 skipButton.addEventListener('click', () => {
+    // Remove animation
+    skipButton.style.animation = "";
+
+    // Set position
+    skipButton.style.transform = "translateY(0)";
+
+    //skipButton.classList.remove('load-in-bottom');
+    //skipButton.classList.add('static');
+
     // Check for final question
     if (questionCounter < (numberOfPracticeItems - 1)) {
         // Reset interface classes
@@ -375,6 +394,16 @@ nextButton.addEventListener('click', () => {
     // Reset interface classes
     resetInterfaceClasses();
 
+    // Remove skip button animation
+    skipButton.style.animation = "";
+
+    // Change skip button position
+    skipButton.style.transform = "translate(0)";
+
+    // Reset skip button
+    // skipButton.classList.remove('load-in-bottom');
+    // skipButton.classList.add('static');
+
     // Update question and answers
     questionDisplay.innerText = practiceItems[questionCounter].kanji;
     for (i = 0; i < practiceItems[questionCounter].answers.length; i++) {
@@ -384,97 +413,163 @@ nextButton.addEventListener('click', () => {
 
 // FINISH BUTTON
 finishButton.addEventListener('click', () => {
-    // Update data
-    for (i = 0; i < practiceItems.length; i++) {
-        for (j = 0; j < userData.length; j++) {
-            if (practiceItems[i].english === userData[j].english) {
-                userData[j].level = practiceItems[i].level;
-                userData[j].learned = practiceItems[i].learned;
+
+    console.log('finish');
+
+    // Change element postions to allow for smooth animation
+    finishButton.style.transform = "translate(0)";
+    answerButtons[3].style.transform = "translate(0)";
+    answerButtons[2].style.transform = "translate(0)";
+    answerButtons[1].style.transform = "translate(0)";
+    answerButtons[0].style.transform = "translate(0)";
+    questionDisplay.style.transform = "translate(0)";
+
+    // Add load-out animation
+    finishButton.style.animation = "load-out-bottom 1s ease-in forwards"
+    answerButtons[3].style.animation = "load-out-right 1s ease-in forwards 0.25s"
+    answerButtons[2].style.animation = "load-out-left 1s ease-in forwards 0.5s"
+    answerButtons[1].style.animation = "load-out-right 1s ease-in forwards 0.75s"
+    answerButtons[0].style.animation = "load-out-left 1s ease-in forwards 1s"
+    questionDisplay.style.animation = "load-out-top 1s ease-in forwards 1.25s"
+    
+
+    // Set timer to allow animation to finish before executing code
+    setTimeout(function() {
+
+        // Update data
+        for (i = 0; i < practiceItems.length; i++) {
+            for (j = 0; j < userData.length; j++) {
+                if (practiceItems[i].english === userData[j].english) {
+                    userData[j].level = practiceItems[i].level;
+                    userData[j].learned = practiceItems[i].learned;
+                };
             };
         };
-    };
 
-    // Then save data
-    saveData();
+        // Then save data
+        saveData();
 
-    // Remove items from previous progress display
-    progressDisplay.innerHTML = "";
+        // Remove items from previous progress display
+        progressDisplay.innerHTML = "";
 
-    // If there are no new items to learn, remove 'Learn More' button
-    /*
-    var isNewItems = false;
-    for (i = 0; i < userData.length; i++) {
-        if (userData[i].level === 0) {
-            isNewItems = true;
+        // Change interface
+        practiceInterface.classList.add('hide');
+        progressInterface.classList.remove('hide');
+
+        // If the user has learned less than ten items remove the 'Practice again' button
+        var numberOfIntroducedItems = 0;
+
+        for (i = 0; i < userData.length; i++) {
+            if (userData[i].learned == true) {
+                numberOfIntroducedItems++;
+            };
         };
-    };
 
-    if (isNewItems === false) {
-        learnMoreButton.classList.add('hide');
-    };
-    */
-
-    // Change interface
-    practiceInterface.classList.add('hide');
-    progressInterface.classList.remove('hide');
-
-    // If the user has learned less than ten items remove the 'Practice again' button
-    var numberOfIntroducedItems = 0;
-
-    for (i = 0; i < userData.length; i++) {
-        if (userData[i].learned == true) {
-            numberOfIntroducedItems++;
+        if (numberOfIntroducedItems < 10) {
+            practiceAgainButton.classList.add('hide');
+        } else if (numberOfIntroducedItems >= userData.length) {
+            practiceAgainButton.classList.remove('hide');
+            learnMoreButton.classList.add('hide');
+        } else {
+            practiceAgainButton.classList.remove('hide');
         };
-    };
 
-    if (numberOfIntroducedItems < 10) {
-        practiceAgainButton.classList.add('hide');
-    } else if (numberOfIntroducedItems >= userData.length) {
-        practiceAgainButton.classList.remove('hide');
-        learnMoreButton.classList.add('hide');
-    } else {
-        practiceAgainButton.classList.remove('hide');
-    };
+        // Create score display
+        // Add header
+            const progressDisplayHeader = document.createElement('div');
+            const progressDisplayHeaderEnglish = document.createElement('h3');
+            const progressDisplayHeaderKanji = document.createElement('h3');
+            const progressDisplayHeaderLevel = document.createElement('h3');
 
-    // Create score display
-    for (i = 0; i < numberOfPracticeItems; i++) {
-        // Create elements
-        const progressDisplayItem = document.createElement('div');
-        const progressDisplayItemEnglish = document.createElement('h3');
-        const progressDisplayItemKanji = document.createElement('h3');
-        const progressDisplayItemLevel = document.createElement('h3');
+            progressDisplayHeader.classList.add('progress-display-item', 'progress-display-header');
 
-        progressDisplayItem.classList.add('progress-display-item');
+            progressDisplayHeaderEnglish.innerText = 'English';
+            progressDisplayHeaderKanji.innerText = 'Kanji';
+            progressDisplayHeaderLevel.innerText = 'Level';
 
-        // Add data to elements
-        progressDisplayItemEnglish.innerText = practiceItems[i].english;
-        progressDisplayItemKanji.innerText = practiceItems[i].kanji;
-        progressDisplayItemLevel.innerText = (practiceItems[i].level) + " / 10";
+            progressDisplayHeader.appendChild(progressDisplayHeaderEnglish);
+            progressDisplayHeader.appendChild(progressDisplayHeaderKanji);
+            progressDisplayHeader.appendChild(progressDisplayHeaderLevel);
 
-        // Add elements to container
-        progressDisplayItem.appendChild(progressDisplayItemEnglish);
-        progressDisplayItem.appendChild(progressDisplayItemKanji);
-        progressDisplayItem.appendChild(progressDisplayItemLevel);
+            progressDisplay.appendChild(progressDisplayHeader);
 
-        // Add container to page
-        progressDisplay.appendChild(progressDisplayItem);
-    };
+        // Add scores
+        for (i = 0; i < numberOfPracticeItems; i++) {
+            // Create elements
+            const progressDisplayItem = document.createElement('div');
+            const progressDisplayItemEnglish = document.createElement('h3');
+            const progressDisplayItemKanji = document.createElement('h3');
+            const progressDisplayItemLevel = document.createElement('h3');
+
+            progressDisplayItem.classList.add('progress-display-item');
+
+            // Add data to elements
+            progressDisplayItemEnglish.innerText = practiceItems[i].english;
+            progressDisplayItemKanji.innerText = practiceItems[i].kanji;
+            progressDisplayItemLevel.innerText = (practiceItems[i].level) + " / 10";
+
+            // Add elements to container
+            progressDisplayItem.appendChild(progressDisplayItemEnglish);
+            progressDisplayItem.appendChild(progressDisplayItemKanji);
+            progressDisplayItem.appendChild(progressDisplayItemLevel);
+
+            // Add container to page
+            progressDisplay.appendChild(progressDisplayItem);
+        };
+
+        // Set progress interface positions and load-in animations
+        progressDisplay.style.transform = "translateX(-75vw)";
+        practiceAgainButton.style.transform = "translateX(75vw)";
+        learnMoreButton.style.transform = "translateX(75vw)";
+
+        progressDisplay.style.animation = "load-in-left 1s ease-out forwards"
+        practiceAgainButton.style.animation = "load-in-right 1s ease-out forwards 0.25s"
+        learnMoreButton.style.animation = "load-in-right 1s ease-out forwards 0.5s"
+
+    }, 2250)
 });
 
 // LEARN MORE BUTTON
 learnMoreButton.addEventListener('click', () => {
-    resetData();
-    setLearningInterface();
-    newItemsCounter = 0;
+    // Set progress interface positions and load-out animations
+    progressDisplay.style.transform = "translateX(0)";
+    practiceAgainButton.style.transform = "translateX(0)";
+    learnMoreButton.style.transform = "translateX(0)";
+
+    progressDisplay.style.animation = "load-out-left 1s ease-in forwards 0.5s"
+    practiceAgainButton.style.animation = "load-out-right 1s ease-in forwards 0.25s"
+    learnMoreButton.style.animation = "load-out-right 1s ease-in forwards"
+
+    // Add timer to let animations play out
+    setTimeout(function() {
+    // Reset animations
+        vocabCard.style.animation = "load-in-left ease-out 1s forwards"
+
+        resetData();
+        setLearningInterface();
+        newItemsCounter = 0;
+    }, 1500);
 });
 
 practiceAgainButton.addEventListener('click', () => {
-    // Delete newItems contents
-    newItems = [];
+    // Set progress interface positions and load-out animations
+    progressDisplay.style.transform = "translateX(0)";
+    practiceAgainButton.style.transform = "translateX(0)";
+    learnMoreButton.style.transform = "translateX(0)";
 
-    resetData();
-    makePracticeDeck();
-    setPracticeInterface();
+    progressDisplay.style.animation = "load-out-left 1s ease-in forwards 0.5s"
+    practiceAgainButton.style.animation = "load-out-right 1s ease-in forwards 0.25s"
+    learnMoreButton.style.animation = "load-out-right 1s ease-in forwards"
+
+    // Add timer to let animations play out
+    setTimeout(function() {
+        // Delete newItems contents
+        newItems = [];
+
+        resetData();
+        makePracticeDeck();
+        setPracticeInterface();
+    }, 1500)
 });
 
 // RESET DATA FUNCTION
@@ -490,6 +585,9 @@ async function resetData() {
 
 // SET LEARNING INTERFACE
 async function setLearningInterface() {
+    // Remove practice button animation
+    practiceButton.style.animation = "";
+
     // Remove progress interface
     progressInterface.classList.add('hide');
 
@@ -536,6 +634,23 @@ async function setPracticeInterface() {
 
     // Show practice interface
     practiceInterface.classList.remove('hide');
+
+    // Reset positions
+    answerButtons[3].style.transform = "translateX(-75vw)";
+    answerButtons[2].style.transform = "translateX(-75vw)";
+    answerButtons[1].style.transform = "translateX(-75vw)";
+    answerButtons[0].style.transform = "translateX(-75vw)";
+    questionDisplay.style.transform = "translateY(-75vh)";
+    skipButton.style.transform = "translateY(75vh)";
+    
+    // Reset animations
+    questionDisplay.style.animation = "load-in-top 1s ease-out forwards"
+    answerButtons[0].style.animation = "load-in-left 1s ease-out forwards 0.25s"
+    answerButtons[1].style.animation = "load-in-right 1s ease-out forwards 0.5s"
+    answerButtons[2].style.animation = "load-in-left 1s ease-out forwards 0.75s"
+    answerButtons[3].style.animation = "load-in-right 1s ease-out forwards 1s"
+    skipButton.style.animation = "load-in-bottom 1s ease-out forwards 1.25s"
+    finishButton.style.animation = "";
 
     // Reset answer, skip, finish and next buttons
     for (i = 0; i < answerButtons.length; i++) {

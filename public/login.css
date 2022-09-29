@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: #FEFFFF;
+    font-family: 'Reem Kufi Fun', sans-serif;
 }
 
 form {
@@ -13,12 +15,11 @@ form {
 }
 
 .container {
-    background-color: silver;
+    background-color: #3AAFA9;
     height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
-    font-family: 'Roboto', sans-serif;
 }
 
 .main {
@@ -30,10 +31,11 @@ form {
 }
 
 .login-container {
-    padding: 40px;
-    background-color: white;
+    min-width: 20%;
+    padding: 0px;
+    /* background-color: blue; */
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,28 +44,42 @@ form {
 
 .login-container h1 {
     margin-bottom: 60px;
+    color: white;
+    font-weight: 700;
 }
 
 .login-container input {
+    min-width: 100%;
+    color: #FEFFFF;
     padding: 5px 0px;
     border: none;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid #FEFFFF;
     margin-bottom: 30px;
+    background-color: inherit;
+}
+
+.login-container input::placeholder {
+    color: #FEFFFF;
 }
 
 .login-container input:focus {
     outline: none;
     border: none;
-    border-bottom: 1px solid dodgerblue;
+    color: #17252A;
+    border-bottom: 1px solid #17252A;
 }
 
 .login-container button {
-    margin-top: 30px;
-    width: 100%;
+    margin-top: 20px;
+    min-width: 100%;
     border: none;
     padding: 10px;
     border-radius: 5px;
-    background-color: dodgerblue;
+    background-color: #2B7A78;
     color: white;
     cursor: pointer;
+}
+
+.login-container button:nth-child(1) {
+    background-color: #17252A;
 }

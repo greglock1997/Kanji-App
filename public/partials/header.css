@@ -1,26 +1,32 @@
 .navbar {
+    box-sizing: border-box;
+    position: relative;
     width: 100%;
-    background-color: white;
+    max-height: auto;
+    color: #FEFFFF;
     display: flex;
     justify-content: space-between;
     padding: 0px;
-    min-height: 80px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    z-index: 1;
 }
 
 .navbar-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 100%;
     width: 100%;
     padding: 15px;
+    font-weight: 700;
 }
 
 .navbar-links {
+    color: white;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    font-weight: 400;
 }
 
 .navbar-links h2 {
@@ -32,17 +38,18 @@
 }
 
 .navbar-links h2:hover {
-    color: dodgerblue;
+    color: #17252A;
 }
 
 .navbar-links a {
-    color: black;
+    color: #FEFFFF;
     text-decoration: none;
     transition: 0.1s;
+    font-weight: 400;
 }
 
 .navbar-links a:hover {
-    color: dodgerblue;
+    color: #17252A;
 }
 
 .hamburger {
@@ -57,24 +64,35 @@
     border-radius: 2px;
     margin: 5px auto;
     transition: all 0.3s ease-in-out;
-    background-color: black;
+    background-color: #FEFFFF;
 }
 
 .show {
     display: flex;
 }
 
+.static {
+    transform: translate(0);
+}
 
 @media only screen and (max-width: 768px) {
     .navbar {
         display: flex;
         flex-direction: column;
+        background-color: #17252A;
+        padding-bottom: 0px;
+    }
+
+    .navbar-header {
+        height: 100%;
     }
 
     .navbar-links {
+        top: 100%;
+        position: absolute;
         display: none;
         flex-direction: column;
-        background-color: white;
+        background-color: #17252A;
         z-index: 1;
     }
 

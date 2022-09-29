@@ -1,7 +1,10 @@
 <script src="../partials/header.js" defer></script>
+<script src="../partials/loading.js" defer></script>
+<link rel="stylesheet" href="../partials/loading.css">
+<script src="https://kit.fontawesome.com/3425163c52.js" crossorigin="anonymous"></script>
 <div class="navbar">
     <div class="navbar-header">
-        <h1>Kanji App</h1>
+        <h1>KANJI APP</h1>
         <div class="hamburger">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -21,4 +24,7 @@
             <h2><a href="/register">Register</a></h2>
         <% } %>
     </div>
+
+    <%- include('../partials/loading')%>
+    <%- include('../partials/message')%>
 </div>

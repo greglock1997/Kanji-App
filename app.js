@@ -656,6 +656,7 @@ app.post('/item', async (req, res) => {
         }
     );
 
+    req.flash('success', 'Item : "' + kanji + '" successfully updated');
     console.log('Successfully updated');
 
 

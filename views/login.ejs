@@ -5,22 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./partials/message.js" defer></script>
+    <script src="https://kit.fontawesome.com/3425163c52.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="./partials/header.css">
     <link rel="stylesheet" href="./partials/message.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400;700&display=swap" rel="stylesheet">
     <title>Login Page</title>
 </head>
 <body>
     <div class="container">
         <%- include('./partials/header'); %>
-        <%- include('./partials/message'); %>
         <div class="main">
             <div class="login-container">
                 <h1>LOGIN</h1>
-                <form action="/login" method="POST">
+                <form action="/login" method="POST" class="login-form">
                     <input type="text" placeholder="Username" name="username" required>
                     <input type="password" placeholder="Password" name="password" required>
                     <button>Login</button>
@@ -30,6 +30,13 @@
                 </form>
             </div>
         </div>
+
+        <!-- Loading Screen Test -->
+        <!--
+        <div class="loading-screen hide">
+            <i class="fa-solid fa-circle-notch spinner"></i>
+        </div>
+        -->
     </div>
 </body>
 </html>

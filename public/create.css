@@ -2,11 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
+    font-family: 'Reem Kufi Fun', sans-serif;
 }
 
 .container {
-    background-color: silver;
+    background-color: #3AAFA9;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -32,7 +32,6 @@
 }
 
 .progress-display {
-    background-color: white;
     width: 200px;
     border-radius: 10px;
     padding: 20px;
@@ -242,10 +241,7 @@
 }
 
 .create-container {
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    color: #FEFFFF;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -263,14 +259,21 @@
 .create-container form input {
     padding: 5px 0px;
     border: none;
-    border-bottom: 1px solid grey;
+    color: #FEFFFF;
+    background-color: inherit;
+    border-bottom: 1px solid #FEFFFF;
     margin-bottom: 20px;
+}
+
+.create-container input::placeholder {
+    color: #FEFFFF;
 }
 
 .create-container form input:focus {
     outline: none;
     border: none;
-    border-bottom: 1px solid dodgerblue;
+    color: #17252A;
+    border-bottom: 1px solid #17252A;
 }
 
 .create-container form button {
@@ -279,17 +282,9 @@
     border: none;
     padding: 10px;
     border-radius: 5px;
-    background-color: dodgerblue;
-    color: white;
+    background-color: #2B7A78;
+    color: #FEFFFF;
     cursor: pointer;
-}
-
-.correct {
-    background-color: greenyellow;
-}
-
-.incorrect {
-    background-color: red;
 }
 
 .hide {

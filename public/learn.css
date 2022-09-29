@@ -2,40 +2,50 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
+    font-family: 'Reem Kufi Fun', sans-serif;
 }
 
 .container {
-    background-color: silver;
-    height: 100vh;
-    width: 100vw;
+    background-color: #3AAFA9;
+    color: #17252A;
+    max-height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
+    overflow: hidden;
 }
 
 .main {
-    height: 100%;
+    height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+body::-webkit-scrollbar {
+    width: 1em;
+}
+   
+body::-webkit-scrollbar-thumb {
+    background-color: dodgerblue;
+}
+
 .progress-interface {
     padding: 40px;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
+    margin-bottom: 50px;    
 }
 
 .progress-display {
-    background-color: white;
-    width: 200px;
+    background-color: #FEFFFF;
     border-radius: 10px;
-    padding: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,23 +53,34 @@
     font-size: 50px;
     transition: 0.5s;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    margin-top: 20px;  
+    margin-top: 0px;  
 }
 
 .progress-display-item {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    font-size: 15px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    font-size: 12.5px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.progress-display-item h3 {
+    text-align: center;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 50px;
+}
+
+.progress-display-header {
+    color: #2B7A78;
 }
 
 .learning-interface {
-    padding: 40px;
-    height: 100vh;
+    /* padding: 40px; */
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,50 +89,16 @@
 
 .practice-interface {
     padding: 40px;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.score-interface {
-    padding: 40px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;    
-}
-
-.score-display {
-    background-color: white;
-    height: 200px;
-    width: 200px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 50px;
-    transition: 0.5s;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    margin-top: 20px;  
-}
-
-.level-card {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.level-card h3 {
-    font-size: 10px;
-}
 
 .question-display {
-    background-color: white;
+    background-color: #FEFFFF;
     height: 200px;
     width: 200px;
     border-radius: 10px;
@@ -119,8 +106,11 @@
     align-items: center;
     justify-content: center;
     font-size: 100px;
+    font-weight: 700;
     transition: 0.5s;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transform: translateY(-75vh);
+    animation: load-in-top 1s ease-out forwards;
 }
 
 .vocab-card {
@@ -133,12 +123,15 @@
     align-items: center;
     justify-content: space-between;
     transition: 0.5s;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transform: translateX(-75vw);
+    animation: load-in-left 1s ease-out forwards;
 }
 
 .vocab-card h1 {
     margin-bottom: 5px;
     font-size: 100px;
+    font-weight: 700;
 }
 
 .vocab-card h2 {
@@ -162,14 +155,31 @@
     border: none;
     height: 80px;
     width: 80px;
-    color: black;
-    background-color: white;
+    color: #17252A;
+    background-color: #FEFFFF;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transform: translateX(-75vw);
+}
+
+.answer-choice:nth-child(1) {
+    animation: load-in-left 1s ease-out forwards 0.25s;
+}
+
+.answer-choice:nth-child(2) {
+    animation: load-in-right 1s ease-out forwards 0.5s;
+}
+
+.answer-choice:nth-child(3) {
+    animation: load-in-left 1s ease-out forwards 0.75s;
+}
+
+.answer-choice:nth-child(4) {
+    animation: load-in-right 1s ease-out forwards 1s;
 }
 
 .button {
@@ -177,50 +187,63 @@
     height: 50px;
     border: none;
     border-radius: 10px;
-    color: black;
-    background-color: white;
+    font-size: 10px;
+    color: #17252A;
+    background-color: #FEFFFF;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 15px;
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.5s;
 }
 
+.skip-button {
+    transform: translateY(75vh);
+}
+
 .learn-button {
-    color: white;
-    background-color: dodgerblue;
+    color: #FEFFFF;
+    background-color: #2B7A78;
+}
+
+.start-learning-button {
+    transform: translateY(75vh);
+    animation: load-in-bottom 1s ease-out forwards;
 }
 
 .gotit-button {
     color: black;
     background-color: white;
+    transform: translateX(75vw);
+    animation: load-in-right 1s ease-out forwards 0.25s;
 }
 
 .practice-button {
-    color: white;
-    background-color: dodgerblue;
+    color: #FEFFFF;
+    background-color: #2B7A78;
 }
 
 .next-button {
-    color: white;
-    background-color: dodgerblue;
+    color: #FEFFFF;
+    background-color: #2B7A78;
 }
 
 .practice-again-button {
-    color: white;
-    background-color: dodgerblue;
+    color: #FEFFFF;
+    background-color: #2B7A78;
 }
 
 .learn-more-button {
-    color: white;
-    background-color: dodgerblue;
+    color: #FEFFFF;
+    background-color: #17252A;
+    margin-bottom: 30px;
 }
 
 .finish-button {
-    color: white;
-    background-color: dodgerblue;
+    color: #FEFFFF;
+    background-color: #2B7A78;
 }
 
 .answer-choice {
@@ -233,22 +256,132 @@
     width: 200px;
     align-items: center;
     justify-content: center;
-    background-color: white;
-    color: black;
+    background-color: #FEFFFF;
+    color: #17252A;
     border-radius: 10px;
     padding: 10px;
     margin-top: 20px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
+.load-in-left-top {
+    animation: load-in-left 1s ease-out forwards;
+}
+
+.load-in-left-bottom {
+    animation: load-in-left 1s ease-out 0.25s forwards;
+}
+
+.load-in-right-top {
+    animation: load-in-right 1s ease-out 0.5s forwards;
+}
+
+.load-in-right-bottom {
+    animation: load-in-right 1s ease-out 0.75s forwards;
+}
+
+.load-in-top {
+    animation: load-in-top 1s ease-out 1s forwards;
+}
+
+.load-in-bottom {
+    animation: load-in-bottom 1s ease-out 1.25s forwards;
+}
+
 .correct {
-    background-color: greenyellow;
+    color: #FEFFFF;
+    background-color: #77DD77;
 }
 
 .incorrect {
-    background-color: red;
+    color: #FFEEFF;
+    background-color: #F64C72;
 }
 
 .hide {
     display: none;
+}
+
+/* LOAD IN ANIMATIONS */
+
+@keyframes load-in-left {
+    0% {
+        transform: translateX(-75vw);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes load-in-right {
+    0% {
+        transform: translateX(75vw)
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes load-in-top {
+    0% {
+        transform: translateY(-75vh);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes load-in-bottom {
+    0% {
+        transform: translateY(75vh);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* LOAD OUT ANIMATIONS */
+
+@keyframes load-out-left {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-75vw);
+    }
+}
+
+@keyframes load-out-right {
+    0% {
+        transform: translateX(0)
+    }
+
+    100% {
+        transform: translateX(75vw);
+    }
+}
+
+@keyframes load-out-top {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-75vh);
+    }
+}
+
+@keyframes load-out-bottom {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(75vh);
+    }
 }
