@@ -409,6 +409,7 @@ async function createVocabData(username) {
             answers : originalData[i].answers,
             kanji : originalData[i].kanji,
             english : originalData[i].english,
+            romaji : romaji,
             level : 0,
             learned : false
         });
