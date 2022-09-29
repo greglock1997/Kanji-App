@@ -11,6 +11,7 @@ const vocabSchema = new mongoose.Schema({
     },
     kanji: String,
     english: String,
+    romaji: String,
     level: {
         type: Number,
         default: 0

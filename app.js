@@ -69,6 +69,7 @@ async function convertData(currentUsername) {
             answers: data[i].answers,
             kanji: data[i].kanji,
             english: data[i].english,
+            romaji: data[i].romaji,
             level: data[i].level,
             learned: data[i].learned
         };
@@ -556,10 +557,13 @@ app.get('/create', async (req, res) => {
 
 app.post('/create', async (req, res) => {
     // Get data from form
-    var { kanji, english, answerOne, answerTwo, answerThree, answerFour } = req.body;
+    var { kanji, romaji, english, answerOne, answerTwo, answerThree, answerFour } = req.body;
 
     // Change answer data into an array
     var answers = [answerOne, answerTwo, answerThree, answerFour];
+
+    console.log(kanji);
+    console.log(romaji);
 
     // Check item doesn't already exist in database
     const itemAlreadyExists = await Vocab.findOne({ kanji : kanji });
@@ -574,12 +578,12 @@ app.post('/create', async (req, res) => {
             // Create new vocabulary item using data
             var newVocab = await new Vocab({
                 user: allUsers[i].username,
+                romaji: romaji,
                 kanji: kanji,
                 english: english,
                 answers : answers
             });
 
-            // console.log(newVocab);
 
             // Save item
             await newVocab.save();
@@ -637,13 +641,16 @@ app.get('/edit/:id', async (req, res) => {
 // Update edited item
 app.post('/item', async (req, res) => {
     // Get updated data from form
-    var { kanji, english, answerOne, answerTwo, answerThree, answerFour } = req.body;
+    var { kanji, english, romaji, answerOne, answerTwo, answerThree, answerFour } = req.body;
 
     // Find associated item in database and update
 
     await Vocab.updateMany(
         { 
             kanji: kanji
+        },
+        {
+            romaji: romaji
         },
         {
             english: english,

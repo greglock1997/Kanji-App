@@ -18,7 +18,10 @@ var practiceButton = document.querySelector('.practice-button');
 var vocabCard = document.querySelector('.vocab-card');
 var kanjiDisplay = document.querySelector('.kanji-display');
 var englishDisplay = document.querySelector('.english-display');
+var romajiDisplay = document.querySelector('.romaji-display');
 var questionDisplay = document.querySelector('.question-display');
+var questionKanjiDisplay = document.querySelector('.question-kanji-display');
+var questionRomajiDisplay = document.querySelector('.question-romaji-display');
 var progressDisplay = document.querySelector('.progress-display');
 var nextButton = document.querySelector('.next-button');
 var skipButton = document.querySelector('.skip-button');
@@ -230,6 +233,7 @@ startLearningButton.addEventListener('click', () => {
             // Set vocabulary
             kanjiDisplay.innerText = newItems[0].kanji;
             englishDisplay.innerText = newItems[0].english;
+            romajiDisplay.innerText = newItems[0].romaji;
 
             // Update level
             for (i = 0; i < userData.length; i++) {
@@ -272,6 +276,7 @@ gotitButton.addEventListener('click', () => {
         // Update to new item
         kanjiDisplay.innerText = newItems[newItemsCounter].kanji;
         englishDisplay.innerText = newItems[newItemsCounter].english;
+        romajiDisplay.innerText = newItems[newItemsCounter].romaji;
 
     } else {
         // Update current item level
@@ -348,8 +353,6 @@ for (let i = 0; i < answerButtons.length; i++) {
             skipButton.classList.add('hide');
             nextButton.classList.remove('hide');
 
-            // Update question counter
-            questionCounter++;
         } else {
             // Remove skip and next button, replace with finish button
             skipButton.classList.add('hide');
@@ -379,7 +382,8 @@ skipButton.addEventListener('click', () => {
         questionCounter++;
 
         // Update question and answers
-        questionDisplay.innerText = practiceItems[questionCounter].kanji;
+        questionKanjiDisplay.innerText = practiceItems[questionCounter].kanji;
+        questionRomajiDisplay.innerText = practiceItems[questionCounter].romaji;
         for (i = 0; i < practiceItems[questionCounter].answers.length; i++) {
             answerButtons[i].innerText = practiceItems[questionCounter].answers[i];
         }; 
@@ -394,18 +398,18 @@ nextButton.addEventListener('click', () => {
     // Reset interface classes
     resetInterfaceClasses();
 
+    // Update question counter
+    questionCounter++;
+
     // Remove skip button animation
     skipButton.style.animation = "";
 
     // Change skip button position
     skipButton.style.transform = "translate(0)";
 
-    // Reset skip button
-    // skipButton.classList.remove('load-in-bottom');
-    // skipButton.classList.add('static');
-
     // Update question and answers
-    questionDisplay.innerText = practiceItems[questionCounter].kanji;
+    questionKanjiDisplay.innerText = practiceItems[questionCounter].kanji;
+    questionRomajiDisplay.innerText = practiceItems[questionCounter].romaji;
     for (i = 0; i < practiceItems[questionCounter].answers.length; i++) {
         answerButtons[i].innerText = practiceItems[questionCounter].answers[i];
     };    
@@ -620,6 +624,7 @@ async function setLearningInterface() {
         // Set vocabulary
         kanjiDisplay.innerText = newItems[0].kanji;
         englishDisplay.innerText = newItems[0].english;
+        romajiDisplay.innerText = newItems[0].romaji;
 
         // Move to next item
         // newItemsCounter++;
@@ -663,7 +668,8 @@ async function setPracticeInterface() {
     skipButton.classList.remove('hide');
 
     // Set question and answer data
-    questionDisplay.innerText = practiceItems[0].kanji;
+    questionKanjiDisplay.innerText = practiceItems[0].kanji;
+    questionRomajiDisplay.innerText = practiceItems[0].romaji;
     for (i = 0; i < practiceItems[0].answers.length; i++) {
         answerButtons[i].innerText = practiceItems[0].answers[i];
     };    

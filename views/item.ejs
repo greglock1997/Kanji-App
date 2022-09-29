@@ -24,6 +24,7 @@
                 <form action="/item" method="POST">
                     <input type="text" value="<%= vocabItem.kanji %>" name="kanji" required maxlength="1">
                     <input type="text" value="<%= vocabItem.english %>" name="english" required maxlength="10">
+                    <input type="text" value="<%= vocabItem.romaji %>" name="romaji" required maxlength="10"> 
                     <input type="text" value="<%= vocabItem.answers[0] %>" name="answerOne" required maxlength="10">
                     <input type="text" value="<%= vocabItem.answers[1] %>" name="answerTwo" required maxlength="10">
                     <input type="text" value="<%= vocabItem.answers[2] %>" name="answerThree" required maxlength="10">
