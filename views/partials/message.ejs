@@ -1,0 +1,13 @@
+<% if (successMessage != '') { %>
+    <div class="message-container success">
+        <h3><%= successMessage %></h3>
+        <span class="delete-button">&#10006;</span>
+    </div>
+<% } %>
+
+<% if (errorMessage != '') { %>
+    <div class="message-container error">
+        <h3><%= errorMessage %></h3>
+        <span class="delete-button">&#10006;</span>
+    </div>
+<% } %>
