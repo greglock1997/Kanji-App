@@ -699,4 +699,7 @@ function setDataToZero() {
         userData[i].level = 0;
         userData[i].learned = false;
     };
-}
+};
+
+// EXPORT FUNCTIONS FOR TESTING
+module.exports = checkForDuplicate();

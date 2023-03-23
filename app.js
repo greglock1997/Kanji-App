@@ -395,7 +395,6 @@ app.get('/admin', async (res, req) => {
         });
         newData.save();
     };
-    console.log("Data saved");
 });
 
 // MAKE NEW VOCAB DATA FOR NEW USER
@@ -439,6 +438,21 @@ app.get('/addQuestions', async (req, res) => {
     };
 });
 
+
+// ERROR 404
+/*
+app.all('*', (req, res) => {
+    // Redirect user to login page if using an unknown address
+    // Log user out if already logged in
+    if (req.session.loggedIn) {
+        req.flash('error', 'Error 404, page not found');
+        res.redirect('/logout', { errorMessage : req.flash('error') });
+    } else {
+        res.render('login', { loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') });
+    };    
+})
+*/
+  
 
 // LOGIN PAGE
 app.get('/login', (req, res) => {
@@ -601,7 +615,6 @@ app.post('/create', async (req, res) => {
 app.get('/edit', async (req, res) => {
     // Get vocab data
     var vocabData = await Vocab.find({user : "Admin"});
-    // console.log(vocabData);
 
     // Check for admin status
     if (req.session.username === "Admin") {
@@ -681,6 +694,23 @@ app.get('/logout', async (req, res) => {
     questions = [];
 });
 
+
+// ERROR 404, MUST BE PLACED AFTER OTHER ROUTES
+app.get('*', async (req, res) => {
+    // Redirect user to login page if using an unknown address
+    // Redirect user to learn page if already logged in
+    if (req.session.loggedIn) {
+        /*
+        req.flash('error', 'Error 404, logging out');
+        await req.session.destroy();
+        res.redirect('/login');
+        */
+    } else {
+        req.flash('error', 'Error 404, page not found');
+        res.render('login', { loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') });
+    };  
+})
+
 // ALLOWS CLIENT TO FETCH DATA FROM DATABASE
 app.get('/getDatabaseData', (req, res) => {
     res.send(questions);
@@ -701,7 +731,6 @@ app.post('/sendDatabaseData', async (req, res) => {
             }
         );
     };
-    console.log('Data Saved');
 });
 
 const port = process.env.PORT || 3000;
