@@ -438,22 +438,6 @@ app.get('/addQuestions', async (req, res) => {
     };
 });
 
-
-// ERROR 404
-/*
-app.all('*', (req, res) => {
-    // Redirect user to login page if using an unknown address
-    // Log user out if already logged in
-    if (req.session.loggedIn) {
-        req.flash('error', 'Error 404, page not found');
-        res.redirect('/logout', { errorMessage : req.flash('error') });
-    } else {
-        res.render('login', { loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') });
-    };    
-})
-*/
-  
-
 // LOGIN PAGE
 app.get('/login', (req, res) => {
     // Log user out if already logged in
