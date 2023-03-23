@@ -694,23 +694,6 @@ app.get('/logout', async (req, res) => {
     questions = [];
 });
 
-
-// ERROR 404, MUST BE PLACED AFTER OTHER ROUTES
-app.get('*', async (req, res) => {
-    // Redirect user to login page if using an unknown address
-    // Redirect user to learn page if already logged in
-    if (req.session.loggedIn) {
-        /*
-        req.flash('error', 'Error 404, logging out');
-        await req.session.destroy();
-        res.redirect('/login');
-        */
-    } else {
-        req.flash('error', 'Error 404, page not found');
-        res.render('login', { loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') });
-    };  
-})
-
 // ALLOWS CLIENT TO FETCH DATA FROM DATABASE
 app.get('/getDatabaseData', (req, res) => {
     res.send(questions);
@@ -732,6 +715,19 @@ app.post('/sendDatabaseData', async (req, res) => {
         );
     };
 });
+
+// ERROR 404, MUST BE PLACED AFTER OTHER ROUTES
+app.all('*', async (req, res) => {
+    // Redirect user to login page if using an unknown address
+    // Redirect user to learn page if already logged in
+    if (req.session.loggedIn) {
+        req.flash('error', 'Error 404, logging out');
+        res.redirect('/logout');
+    } else {
+        req.flash('error', 'Error 404, page not found');
+        res.render('login', { loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') });
+    };  
+})
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
