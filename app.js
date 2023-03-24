@@ -416,27 +416,6 @@ async function createVocabData(username) {
     };
 };
 
-// DESIGN TESTING PAGE
-app.get('/designTest', async (req, res) => {
-    res.render('designTest');
-});
-
-// ADMIN ROUTES
-app.get('/printData', async (req, res) => {
-    const items = await Vocab.find({user : req.session.username});
-    console.log(items);
-});
-
-app.get('/addQuestions', async (req, res) => {
-    for (i =0; i < newQuestions.length; i++) {
-        var newItem = await new Vocab({
-            answers: newQuestions[i].answers,
-            kanji: newQuestions[i].kanji,
-            english: newQuestions[i].english
-        });
-        newItem.save();
-    };
-});
 
 // LOGIN PAGE
 app.get('/login', (req, res) => {
@@ -454,7 +433,6 @@ app.post('/login', async (req, res) => {
 
     // Find user in database
     var currentUser = await User.findOne({username: username});
-    console.log(currentUser);
 
     if (currentUser) {
         // Check for password match
@@ -490,8 +468,6 @@ app.post('/register', async (req, res) => {
     
     // Check user is not already registered
     const userAlreadyRegistered = await User.findOne({ username : registerUsername });
-    console.log(userAlreadyRegistered);
-    console.log('Registered');
     if (userAlreadyRegistered) {
         req.flash('error', 'Username already registered, please try another');
         res.redirect('/register'); 
@@ -501,15 +477,12 @@ app.post('/register', async (req, res) => {
             if (registerPassword === registerConfirmPassword) {
                 // Hash password
                 var hashedPassword = await bcrypt.hash(registerPassword, 10);
-                console.log(hashedPassword);
                 
                 // Create new user
                 var newUser = await new User({
                     username: registerUsername,
                     password: hashedPassword
                 });
-
-                console.log(newUser);
 
                 // Create user vocabulary data
                 createVocabData(registerUsername);    
@@ -560,9 +533,6 @@ app.post('/create', async (req, res) => {
 
     // Change answer data into an array
     var answers = [answerOne, answerTwo, answerThree, answerFour];
-
-    console.log(kanji);
-    console.log(romaji);
 
     // Check item doesn't already exist in database
     const itemAlreadyExists = await Vocab.findOne({ kanji : kanji });
@@ -662,9 +632,6 @@ app.post('/item', async (req, res) => {
     );
 
     req.flash('success', 'Item : "' + kanji + '" successfully updated');
-    console.log('Successfully updated');
-
-
 
     res.redirect('/edit');
 });

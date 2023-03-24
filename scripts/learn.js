@@ -5,7 +5,6 @@ var numberOfNewItems = 5;
 var newItemsCounter = 0;
 var practiceItems = [];
 var numberOfPracticeItems = 10;
-var practiceItemsCounter = 0;
 var questionCounter = 0;
 
 // DOM ELEMENTS //
@@ -49,7 +48,6 @@ async function saveData() {
         },
         body: JSON.stringify(userData)
     });
-    console.log('Data Saved');
 };
 
 // CREATING DECK FUNCTIONS //
@@ -89,7 +87,6 @@ async function makePracticeDeck() {
         practiceItems = newItems;
     } else if (firstTime() == false) {
         if (newItems.length > 0) {
-            console.log("newItems");
             practiceItems = newItems;
 
             // Add new items
@@ -136,13 +133,10 @@ function firstTime() {
         };
     };
 
-
     if (counter < 10) {
         numberOfPracticeItems = 5;
-        console.log("First time");
         return true;
     } else {
-        console.log("Not first time");
         return false;
     };
 };
@@ -331,7 +325,10 @@ for (let i = 0; i < answerButtons.length; i++) {
         // Check to see if user has chosen the correct answer
         if (answerButtons[i].innerText === practiceItems[questionCounter].english) {
             answerButtons[i].classList.add('correct');
-            practiceItems[questionCounter].level++;
+            // Only increase level if less than 10
+            if (practiceItems[questionCounter].level < 10) {
+                practiceItems[questionCounter].level++;
+            };
         } else {
         // If not, show them the correct answer
             answerButtons[i].classList.add('incorrect');
@@ -417,8 +414,6 @@ nextButton.addEventListener('click', () => {
 
 // FINISH BUTTON
 finishButton.addEventListener('click', () => {
-
-    console.log('finish');
 
     // Change element postions to allow for smooth animation
     finishButton.style.transform = "translate(0)";
@@ -583,7 +578,6 @@ async function resetData() {
     numberOfNewItems = 5;
     newItemsCounter = 0;
     numberOfPracticeItems = 10;
-    practiceItemsCounter = 0;
     questionCounter = 0;
 };
 
@@ -673,32 +667,6 @@ async function setPracticeInterface() {
     for (i = 0; i < practiceItems[0].answers.length; i++) {
         answerButtons[i].innerText = practiceItems[0].answers[i];
     };    
-};
-
-// TESTING FUNCTIONS //
-function printData() {
-    console.log(userData);
-}
-
-function editData() {
-    for (i = 0; i < userData.length; i++) {
-        userData[i].level = 1;
-        userData[i].learned = true;
-    };
-};
-
-function practiceData() {
-    for (i = 0; i < 10; i++) {
-        userData[i].level = 1;
-        userData[i].learned = true;
-    };
-}
-
-function setDataToZero() {
-    for (i = 0; i < userData.length; i++) {
-        userData[i].level = 0;
-        userData[i].learned = false;
-    };
 };
 
 // EXPORT FUNCTIONS FOR TESTING
