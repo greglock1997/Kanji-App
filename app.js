@@ -571,7 +571,7 @@ app.get('/edit', async (req, res) => {
     var vocabData = await Vocab.find({user : "Admin"});
 
     // Check for admin status
-    if (req.session.username == "Admin") {
+    if (req.session.username == "Greg") {
         res.render('edit', { user : req.session.username, loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error'), vocabData })
     } else {
         req.flash('error', 'Please login as admin to access this page');
