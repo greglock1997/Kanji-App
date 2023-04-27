@@ -381,22 +381,6 @@ let initialData = [
     }                     
 ];
 
-// CREATE ADMIN DATA
-app.get('/admin', async (res, req) => {
-    for (i = 0; i < initialData.length; i++) {
-        // Create new data with new username
-        var newData = await new Vocab({
-            user : "Admin",
-            answers : initialData[i].answers,
-            kanji : initialData[i].kanji,
-            english : initialData[i].english,
-            level : 0,
-            learned : false
-        });
-        newData.save();
-    };
-});
-
 // MAKE NEW VOCAB DATA FOR NEW USER
 async function createVocabData(username) {
     // Find original template data
