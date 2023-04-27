@@ -519,7 +519,7 @@ app.get('/learn', async (req, res) => {
 
 // CREATE VOCABULARY PAGE
 app.get('/create', async (req, res) => {
-    if(req.session.username == "Admin") {
+    if(req.session.username == 'Admin') {
         res.render('create', { user : req.session.username, loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') });
     } else {
         req.flash('error', 'Please login as admin to access this page');
@@ -571,7 +571,7 @@ app.get('/edit', async (req, res) => {
     var vocabData = await Vocab.find({user : "Admin"});
 
     // Check for admin status
-    if (req.session.username == "Greg") {
+    if (req.session.username == 'Admin') {
         res.render('edit', { user : req.session.username, loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error'), vocabData })
     } else {
         req.flash('error', 'Please login as admin to access this page');
@@ -598,7 +598,7 @@ app.get('/edit/:id', async (req, res) => {
     var vocabItem = await Vocab.findOne({ kanji : kanji });
 
     // Check for admin status
-    if (req.session.username === "Admin") {
+    if (req.session.username === 'Admin') {
         res.render('item', { vocabItem, user : req.session.username, loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') })
     } else {
         req.flash('error', 'Please login as admin to access this page');
