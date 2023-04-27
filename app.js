@@ -503,12 +503,6 @@ app.get('/learn', async (req, res) => {
 
 // CREATE VOCABULARY PAGE
 app.get('/create', async (req, res) => {
-    console.log(req.session.username);
-    if (req.session.username == 'Admin') {
-        console.log('Admin);
-    } else {
-        console.log('Not admin');
-    };
     res.render('create', { user : req.session.username, loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') });
     
     /*
