@@ -656,6 +656,7 @@ app.post('/sendDatabaseData', async (req, res) => {
     };
 });
 
+/*
 // ERROR 404, MUST BE PLACED AFTER OTHER ROUTES
 app.all('*', async (req, res) => {
     // Redirect user to login page if using an unknown address
@@ -668,6 +669,7 @@ app.all('*', async (req, res) => {
         res.render('login', { loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') });
     };  
 })
+*/
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
