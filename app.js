@@ -503,16 +503,12 @@ app.get('/learn', async (req, res) => {
 
 // CREATE VOCABULARY PAGE
 app.get('/create', async (req, res) => {
-    res.render('create', { user : req.session.username, loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') });
-    
-    /*
-    if(req.session.username == 'Admin') {
+    if (req.session.loggedIn) {
         res.render('create', { user : req.session.username, loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') });
     } else {
         req.flash('error', 'Please login as admin to access this page');
         res.redirect('/login');
     };
-    */
 });
 
 app.post('/create', async (req, res) => {
@@ -559,7 +555,7 @@ app.get('/edit', async (req, res) => {
     var vocabData = await Vocab.find({user : "Admin"});
 
     // Check for admin status
-    if (req.session.username == 'Admin') {
+    if (req.session.loggedIn) {
         res.render('edit', { user : req.session.username, loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error'), vocabData })
     } else {
         req.flash('error', 'Please login as admin to access this page');
@@ -568,14 +564,19 @@ app.get('/edit', async (req, res) => {
 });
 
 app.post('/delete/:id', async (req, res) => {
-    // Get item id from the request
-    const { id } = req.params;
-    
-    // Delete items
-    await Vocab.deleteMany({ kanji : id });
+    if (req.session.loggedIn) {
+        // Get item id from the request
+        const { id } = req.params;
 
-    req.flash('success', 'Item : "' + id + '" successfully deleted');
-    res.redirect('/edit');
+        // Delete items
+        await Vocab.deleteMany({ kanji : id });
+
+        req.flash('success', 'Item : "' + id + '" successfully deleted');
+        res.redirect('/edit');
+    } else {
+        req.flash('error', 'Please login as admin to access this page');
+        res.redirect('/login');
+    }
 });
 
 // EDIT INDIVIDUAL ITEM PAGE
@@ -586,7 +587,7 @@ app.get('/edit/:id', async (req, res) => {
     var vocabItem = await Vocab.findOne({ kanji : kanji });
 
     // Check for admin status
-    if (req.session.username === 'Admin') {
+    if (req.session.loggedIn) {
         res.render('item', { vocabItem, user : req.session.username, loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') })
     } else {
         req.flash('error', 'Please login as admin to access this page');
