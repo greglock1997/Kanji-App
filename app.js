@@ -519,12 +519,22 @@ app.get('/learn', async (req, res) => {
 
 // CREATE VOCABULARY PAGE
 app.get('/create', async (req, res) => {
+    console.log(req.session.username);
+    if (req.session.username == 'Admin') {
+        console.log('Admin);
+    } else {
+        console.log('Not admin');
+    };
+    res.render('create', { user : req.session.username, loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') });
+    
+    /*
     if(req.session.username == 'Admin') {
         res.render('create', { user : req.session.username, loggedIn : req.session.loggedIn, successMessage : req.flash('success'), errorMessage : req.flash('error') });
     } else {
         req.flash('error', 'Please login as admin to access this page');
         res.redirect('/login');
     };
+    */
 });
 
 app.post('/create', async (req, res) => {
